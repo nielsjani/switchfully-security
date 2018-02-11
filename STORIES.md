@@ -49,6 +49,9 @@ Getting started:
  We will be switching to an LDAP in later exercises.
 - The inMemoryAuthentication will have to hold a user called 'JMILLER' with password 'THANKS' in order for the AvocadoTest to pass.
 
+Extra info:
+- [What is a realm?](https://stackoverflow.com/questions/16186834/whats-the-meaning-of-realm-in-spring-security)
+
 Extra assignment:
 - AvocadoTest currently only tests the 'getDeployedArmyInfo' REST-call. Write similar tests for the other 3 REST-calls
 
