@@ -11,7 +11,7 @@ public class AvocadoTest extends RestAssuredTest {
 
     @Test
     public void getDeployedArmyInfo_givenKnownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldAllowAccess() {
-        ArmyInfoDto actual = givenRequestForUser("JMILLER", "HANKS")
+        ArmyInfoDto actual = givenRequestForUser("JMILLER", "THANKS")
                 .when()
                 .get("/army/Belgium")
                 .then()
