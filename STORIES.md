@@ -55,7 +55,9 @@ Extra info:
 Extra assignment:
 - AvocadoTest currently only tests the 'getDeployedArmyInfo' REST-call. Write similar tests for the other 3 REST-calls
 
-## Operation Baobab
+## Operation Baobab (starting point: [BAOBAB-START branch](https://github.com/nielsjani/switchfully-security/tree/BAOBAB-START))
+
+
 
 ## Operation Cedar
 
