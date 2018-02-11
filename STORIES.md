@@ -40,11 +40,17 @@ This app has an imaginary UI, but it is not relevant for these exercises.
 What you will be doing is securing the REST-calls in a number of ways using Spring's security features. 
 
 Your first task is to make sure not just anyone can call the REST-API. 
-We only want people using a Basic authentication header AND whose username and password are known in the system to be able to do REST-calls.
+We only want people using a Basic authentication header AND whose username and password combination are known to the system to be able to do REST-calls.
 
-//TODO: some resources to get students started
-//TODO: make e2e tests in AvocadoTest
+Getting started:
+- Read [this](http://www.devglan.com/spring-security/spring-boot-security-rest-basic-authentication) article
+- You can use an inMemoryAuthentication implementation for now to store your users and their passwords.
+ This is not an advisable solution for real life applications, because there is no way for you to easily change/add/remove your users when the app is running.
+ We will be switching to an LDAP in later exercises.
+- The inMemoryAuthentication will have to hold a user called 'JMILLER' with password 'THANKS' in order for the AvocadoTest to pass.
 
+Extra assignment:
+- AvocadoTest currently only tests the 'getDeployedArmyInfo' REST-call. Write similar tests for the other 3 REST-calls
 
 ## Operation Baobab
 

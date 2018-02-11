@@ -1,4 +1,46 @@
 package avocado;
 
-public class AvocadoTest {
+import com.cegeka.switchfully.security.ArmyInfoDto;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
+public class AvocadoTest extends RestAssuredTest {
+
+    @Test
+    public void getDeployedArmyInfo_givenKnownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldAllowAccess() {
+        ArmyInfoDto actual = givenRequestForUser("JMILLER", "HANKS")
+                .when()
+                .get("/army/Belgium")
+                .then()
+                .assertThat()
+                .statusCode(OK.value())
+                .extract()
+                .body()
+                .as(ArmyInfoDto.class);
+
+        assertThat(actual.country).isEqualTo("Belgium");
+    }
+
+    @Test
+    public void getDeployedArmyInfo_givenKnownUsernameAndWrongPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
+        givenRequestForUser("JMILLER", "JBAKER")
+                .when()
+                .get("/army/Belgium")
+                .then()
+                .assertThat()
+                .statusCode(UNAUTHORIZED.value());
+    }
+
+    @Test
+    public void getDeployedArmyInfo_givenUnknownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
+        givenRequestForUser("FONZ", "AYE")
+                .when()
+                .get("/army/Belgium")
+                .then()
+                .assertThat()
+                .statusCode(UNAUTHORIZED.value());
+    }
 }
