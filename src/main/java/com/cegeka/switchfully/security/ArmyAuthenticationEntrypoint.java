@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+//This entrypoint is only used when the authentication didn't succeed (eg: an unknown username/password combination).
 @Component
 public class ArmyAuthenticationEntrypoint extends BasicAuthenticationEntryPoint {
 
@@ -22,7 +22,5 @@ public class ArmyAuthenticationEntrypoint extends BasicAuthenticationEntryPoint 
             throws IOException, ServletException {
         response.addHeader("WWW-Authenticate", "Basic realm=" +getRealmName());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        PrintWriter writer = response.getWriter();
-        writer.println("HTTP Status 401 - " + authEx.getMessage());
     }
 }
