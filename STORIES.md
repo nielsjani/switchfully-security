@@ -54,6 +54,8 @@ Extra info:
 
 Extra assignment:
 - AvocadoTest currently only tests the 'getDeployedArmyInfo' REST-call. Write similar tests for the other 3 REST-calls
+- Try starting the application and call the rest endpoint using Advanced Rest Client or Postman. 
+Experiment with correct and incorrect authorisation data and check if the app returns what you'd expect.
 
 ## Operation Baobab (starting point: [BAOBAB-START branch](https://github.com/nielsjani/switchfully-security/tree/BAOBAB-START))
 
