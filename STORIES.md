@@ -76,10 +76,31 @@ Extra assignment:
 - The article offers multiple ways to fix this problem. Try implementing both and see if they both do the job.
 - Users can have multiple roles. Create a user who is both a PRIVATE and a HUMAN_RELATIONSHIPS and check if he can do everything both roles can.
 
-## Operation Cedar
+## Operation Cedar (starting point: [CEDAR-START branch](https://github.com/nielsjani/switchfully-security/tree/CEDAR-START))
 In the previous story we implemented 'Role based'-security. There is another way to approach this, however: feature based security.
 
-But first, let's switch to a userstore that's a bit closer to reality. Out goes the inMemoryAuthentication and in comes the LDAP!
+But first, let's switch to a userstore that's a bit closer to reality. Out goes the inMemoryAuthentication and in comes your very own authenticationProvider!
+
+You will have to get rid of the inMemoryAuthentication in your Spring SecurityConfig class and replace it by a custom AuthenticationProvider.
+This is a class that extends AuthenticationProvider. You will have to implement two methods: 'authenticate' and 'supports'.
+
+### Implementing the authenticate() method
+In the package 'external.authentication' you will find the class 'FakeAuthenticationService'. 
+You will have to provide this class with a username and a password. 
+If the combination is correct, this service will return an Object that contains the username, password and roles of the user.
+If the combination is incorrect, it will return null.
+
+The authenticate should return an 'Authentication' object if the username/password combo exists. 
+Otherwise it should throw an exception that extends the AuthenticationException class.
+Pick one you think fits the bill.
+**HINT**: This method is a great candidate for some unit-tests.
+
+### Implementing the supports() method
+This method determines if the custom AuthenticationProvider will handle the Authentication request. In our case, the provider handles Username/Password Authenticationtokens.
+The standard Java method 'isAssignableFrom()' might help you.
+
+Note that no extra end-to-end tests have been provided for this story. 
+That's because the existing behaviours aren't altered in any way. So after you're done, all the other tests should still run.
 
 ## Operation Dogwood
 
