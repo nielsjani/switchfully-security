@@ -2,11 +2,11 @@ package avocado;
 
 import org.junit.Test;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 public class BaobabTest extends RestAssuredTest {
-
     @Test
     public void getDeployedArmyInfo_givenUserWithRoleCivilian_ThenShouldGetForbidden() {
         givenRequestForUser("ZWANETTA", "WORST")
