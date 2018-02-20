@@ -1,4 +1,4 @@
-package com.cegeka.switchfully.security;
+package com.cegeka.switchfully.security.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+
 @Configuration
 @EnableWebSecurity
 //annotation needed for spring to pick up the @PreAuthorize annotations on the ArmyResource
@@ -17,9 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationEntryPoint authEntryPoint;
+    @Autowired
+    private ArmyAuthenticationProvider armyAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.csrf().disable().authorizeRequests()
                 //One way to fix the authorisation problem is using the 'antmatchers' methods to force users to have certain role(s) if they want to access a certain endpoint
                 //advantage: able to secure multiple, similar url's at the same time
@@ -36,14 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("ZWANETTA").password("WORST").roles("CIVILIAN")
-                .and()
-                .withUser("JMILLER").password("THANKS").roles("PRIVATE")
-                .and()
-                .withUser("UNCLE").password("SAM").roles("HUMAN_RELATIONSHIPS")
-                .and()
-                .withUser("GENNY").password("RALLY").roles("GENERAL");
+        auth.authenticationProvider(armyAuthenticationProvider);
+//        auth.inMemoryAuthentication()
+//                .withUser("ZWANETTA").password("WORST").roles("CIVILIAN")
+//                .and()
+//                .withUser("JMILLER").password("THANKS").roles("PRIVATE")
+//                .and()
+//                .withUser("UNCLE").password("SAM").roles("HUMAN_RELATIONSHIPS")
+//                .and()
+//                .withUser("GENNY").password("RALLY").roles("GENERAL");
     }
 
 }

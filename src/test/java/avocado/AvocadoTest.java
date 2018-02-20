@@ -1,6 +1,6 @@
 package avocado;
 
-import com.cegeka.switchfully.security.ArmyInfoDto;
+import com.cegeka.switchfully.security.rest.ArmyInfoDto;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

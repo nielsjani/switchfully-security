@@ -1,4 +1,4 @@
-package com.cegeka.switchfully.security;
+package com.cegeka.switchfully.security.rest;
 
 import java.io.Serializable;
 

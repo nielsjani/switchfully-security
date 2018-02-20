@@ -1,6 +1,6 @@
 package com.cegeka.switchfully.security;
 
-import org.assertj.core.api.Assertions;
+import com.cegeka.switchfully.security.spring.ArmyAuthenticationEntrypoint;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
