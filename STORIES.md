@@ -102,6 +102,13 @@ The standard Java method 'isAssignableFrom()' might help you.
 Note that no extra end-to-end tests have been provided for this story. 
 That's because the existing behaviours aren't altered in any way. So after you're done, all the other tests should still run.
 
+### Oh right, one more thing:
+
+When using a custom AuthenticationProvider, Spring pretty much requires you to be using feature based security. 
+To not make the story even bigger than it already is, we're gonna cheat a bit on that part (don't worry, we'll implement it properly in the next story).
+To fix everything up, change your 'hasRole'- and 'hasAnyRole'-code in the ArmyResource and/or SecurityConfig to 'hasAuthority' and 'hasAnyAuthority'.
+If everything is implemented correctly, both the baobabTest and the AvocadoTest should run.
+
 ## Operation Dogwood
 
 # Extraction Point
