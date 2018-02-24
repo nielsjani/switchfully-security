@@ -109,7 +109,22 @@ To not make the story even bigger than it already is, we're gonna cheat a bit on
 To fix everything up, change your 'hasRole'- and 'hasAnyRole'-code in the ArmyResource and/or SecurityConfig to 'hasAuthority' and 'hasAnyAuthority'.
 If everything is implemented correctly, both the baobabTest and the AvocadoTest should run.
 
-## Operation Dogwood
+## Operation Dogwood (starting point: [DOGWOOD-START branch](https://github.com/nielsjani/switchfully-security/tree/DOGWOOD-START))
+
+Back to feature-based security. To get up to speed about the benefits feature-based security has, read [the following post on stackexchange](https://softwareengineering.stackexchange.com/questions/299729/role-vs-permission-based-access-control).
+
+You've already completed one step along the way: using the 'hasAuthority' method/annotation.
+Next, we'll have to create the different features and couple them to the role(s) that are allowed to access them.
+
+Once you've got that coupling, you'll have to fill up the  your custom Authentication class's roles (GrandedAuthority's) correctly.
+The FakeAuthenticationService will provide you with the role(s) of the logged in users. You'll have to map those roles to the allowed features manually.
+
+Once again, there are no new end to end tests. The old tests should keep working after you're done, ofcourse.
+
+Extra info:
+- [Another article on role based vs feature based (called 'activity based' here)](https://lostechies.com/derickbailey/2011/05/24/dont-do-role-based-authorization-checks-do-activity-based-checks/)
+
+## Operation Elm
 
 # Extraction Point
 
