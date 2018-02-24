@@ -137,7 +137,7 @@ An example:
 
 The method that is called should return a boolean: true if the call should be allowed, false if it should be denied.
 
-Your task is to stop people from joining the army if they've got a criminal record. 
+Your task is to stop people from getting promoted if they've got a criminal record. 
 To check if someone has a criminal record, you can use the CriminalRecordService in the external package. 
 Its method 'hasCriminalRecord' takes a username (a.k.a. the path param from the rest call) and returns a 'CriminalRecord' object.
 If the 'offenses' on this object are empty, the person is 'clean'.
