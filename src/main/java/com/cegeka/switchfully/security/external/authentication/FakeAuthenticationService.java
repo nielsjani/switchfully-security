@@ -10,6 +10,8 @@ import static com.google.common.collect.Lists.newArrayList;
 public class FakeAuthenticationService {
 
     private List<ExternalAuthenticaton> externalAuthenticatons = newArrayList(
+            ExternalAuthenticaton.externalAuthenticaton().withUsername("CRIMI").withPassword("NAL").withRoles(newArrayList("CIVILIAN")),
+            ExternalAuthenticaton.externalAuthenticaton().withUsername("MOB").withPassword("BOSS").withRoles(newArrayList("CIVILIAN")),
             ExternalAuthenticaton.externalAuthenticaton().withUsername("ZWANETTA").withPassword("WORST").withRoles(newArrayList("CIVILIAN")),
             ExternalAuthenticaton.externalAuthenticaton().withUsername("JMILLER").withPassword("THANKS").withRoles(newArrayList("PRIVATE")),
             ExternalAuthenticaton.externalAuthenticaton().withUsername("UNCLE").withPassword("SAM").withRoles(newArrayList("HUMAN_RELATIONSHIPS")),
