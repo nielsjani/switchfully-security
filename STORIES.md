@@ -144,7 +144,7 @@ It the 'offenses' on this object are empty, the person is 'clean'.
 
 A couple of new accounts have been added to the FakeAuthenticationService, some of them with criminal records, others without. 
 
-# Extraction Point
+# Extraction Point (for a look at the final code: [EXTRACTION-POINT branch](https://github.com/nielsjani/switchfully-security/tree/EXTRACTION-POINT))
 
 Congratulations, [a winner is you](http://i0.kym-cdn.com/photos/images/facebook/000/048/783/a_winner_is_you20110724-22047-1nd3wif.jpg)!
 You've completed all stories and made the lives of your fellow countrymen a little safer. 
