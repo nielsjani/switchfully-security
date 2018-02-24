@@ -2,6 +2,7 @@ package com.cegeka.switchfully.security.spring;
 
 import com.cegeka.switchfully.security.external.authentication.ExternalAuthenticaton;
 import com.cegeka.switchfully.security.external.authentication.FakeAuthenticationService;
+import com.cegeka.switchfully.security.spring.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,7 +21,7 @@ public class ArmyAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         ExternalAuthenticaton user = fakeAuthenticationService.getUser(authentication.getPrincipal().toString(), authentication.getCredentials().toString());
         if(user != null){
-            return new ArmyAuthentication(user.getUsername(), user.getPassword(), user.getRoles());
+            return new ArmyAuthentication(user.getUsername(), user.getPassword(), Feature.getFeaturesForRoles(user.getRoles()));
         }
         throw new BadCredentialsException("BAD BAD NOT GOOD");
     }
