@@ -2,6 +2,7 @@ package avocado;
 
 import org.junit.Test;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
@@ -24,7 +25,7 @@ public class ElmTest extends RestAssuredTest {
                 .post("/army/promote/CRIMI")
                 .then()
                 .assertThat()
-                .statusCode(UNAUTHORIZED.value());
+                .statusCode(FORBIDDEN.value());
     }
 
 }
