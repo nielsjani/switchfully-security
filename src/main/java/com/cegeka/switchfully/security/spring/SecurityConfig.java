@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //advantage: able to secure multiple, similar url's at the same time
                 //disadvantage: this code is completely decoupled from the Rest-controller code. This makes it easy to forget to adjust it when e.g. adding a new rest-call
 //                .antMatchers("/army").hasRole("CIVILIAN")
-//                .antMatchers("/army/promote/**").hasRole("HUMAN_RELATIONSHIPS")
+                .antMatchers("/army/promote/{promotee}").access("@armyPromotionCheckerService.doesNotHaveCriminalRecord(#promotee)")
 //                .antMatchers("/army/discharge/**").hasRole("HUMAN_RELATIONSHIPS")
 //                .antMatchers("/army/nuke").hasRole("GENERAL")
 //                .antMatchers("/army/**").hasAnyRole("PRIVATE", "GENERAL")
