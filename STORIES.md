@@ -21,7 +21,7 @@ So get back to work and make your country proud, private! Oorah!
 Next up are the stories you will be developing that will help you learn about securing modern Java applications.
 - Start by forking the [switchfully-security repository](https://github.com/nielsjani/switchfully-security). 
 - Then pull the code from your branched repository to your local machine.
-- Finally, to build the code for the first time, call 'mvnw.cmd clean install' from your command line
+- Finally, to build the code for the first time, call `mvnw.cmd clean install` from your command line
 
 Each story has a 'starting point', a Git branch that has the minimum code setup for you to start the story without too much hassle.
 This can come in handy because some stories build on top of eachother. 
