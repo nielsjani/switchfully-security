@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/army")
+@RequestMapping(path = ArmyResource.ARMY_RESOURCE_PATH)
 public class ArmyResource {
+
+    public static final String ARMY_RESOURCE_PATH = "/armies";
 
     //@PreAutorise annotation only allows user with any of the given roles to access the method. (you could also place it on class level)
     //advantages: it's right near the code for the actual rest-controller
