@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/army")
+@RequestMapping(path = ArmyResource.ARMY_RESOURCE_PATH)
 public class ArmyResource {
+
+    public static final String ARMY_RESOURCE_PATH = "/armies";
 
     @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE ,path = "/{country}")
     public ArmyInfoDto getDeployedArmyInfo(@PathVariable(value = "country") String country){
