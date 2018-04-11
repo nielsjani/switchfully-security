@@ -1,6 +1,7 @@
 package avocado;
 
 import com.cegeka.switchfully.security.rest.ArmyInfoDto;
+import com.cegeka.switchfully.security.rest.ArmyResource;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +14,7 @@ public class AvocadoTest extends RestAssuredTest {
     public void getDeployedArmyInfo_givenKnownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldAllowAccess() {
         ArmyInfoDto actual = givenRequestForUser("JMILLER", "THANKS")
                 .when()
-                .get("/army/Belgium")
+                .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
                 .assertThat()
                 .statusCode(OK.value())
@@ -28,7 +29,7 @@ public class AvocadoTest extends RestAssuredTest {
     public void getDeployedArmyInfo_givenKnownUsernameAndWrongPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
         givenRequestForUser("JMILLER", "JBAKER")
                 .when()
-                .get("/army/Belgium")
+                .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
                 .assertThat()
                 .statusCode(UNAUTHORIZED.value());
@@ -38,7 +39,7 @@ public class AvocadoTest extends RestAssuredTest {
     public void getDeployedArmyInfo_givenUnknownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
         givenRequestForUser("FONZ", "AYE")
                 .when()
-                .get("/army/Belgium")
+                .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
                 .assertThat()
                 .statusCode(UNAUTHORIZED.value());
