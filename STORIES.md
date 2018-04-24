@@ -76,6 +76,7 @@ Extra assignment:
 - The article offers multiple ways to fix this problem. Try implementing both and see if they both do the job.
 - Users can have multiple roles. Create a user who is both a PRIVATE and a HUMAN_RELATIONSHIPS and check if he can do everything both roles can.
 - When using the 'antMatchers' method, create a couple of new rest endpoints:
+
 GET /armies/tanks (getTanksInfo)
 POST /armies/tanks (addTanks)
 DELETE /armies/tanks (blowUpTanksAndEnjoyTheFireworks)
