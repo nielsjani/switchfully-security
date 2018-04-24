@@ -77,16 +77,16 @@ Extra assignment:
 - Users can have multiple roles. Create a user who is both a PRIVATE and a HUMAN_RELATIONSHIPS and check if he can do everything both roles can.
 - When using the 'antMatchers' method, create a couple of new rest endpoints:
 
-GET /armies/tanks (getTanksInfo)
-POST /armies/tanks (addTanks)
-DELETE /armies/tanks (blowUpTanksAndEnjoyTheFireworks)
-PUT /armies/tanks (addNewTanks)
+-- GET /armies/tanks (getTanksInfo)
+-- POST /armies/tanks (addTanks)
+-- DELETE /armies/tanks (blowUpTanksAndEnjoyTheFireworks)
+-- PUT /armies/tanks (addNewTanks)
 
 you don't have to implement these methods. All of them can be void
-The GET call should only be available to PRIVATE and GENERAL and CIVILIAN
-The POST call should only be available to PRIVATE 
-The DELETE call should only be available to GENERAL
-The PUT call should only be available to PRIVATE and GENERAL
+- The GET call should only be available to PRIVATE and GENERAL and CIVILIAN
+- The POST call should only be available to PRIVATE 
+- The DELETE call should only be available to GENERAL
+- The PUT call should only be available to PRIVATE and GENERAL
 
 Write some E2E tests up front to check your assumptions.
 
