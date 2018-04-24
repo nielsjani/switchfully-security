@@ -168,8 +168,11 @@ A couple of new accounts have been added to the FakeAuthenticationService, some 
 
 Extra assignment:
 Implement the promotePrivate method:
+
 A soldier can only be promoted by his supervisor
+
 Create an in-memory structure that holds the link between a private and his supervisor (the supervisor has to be someone with the role PRIVATE or GENERAL)
+
 add/alter an access check to the promotePrivate method that checks if a certain promotion can take place.
 
 Then do the same for dischargeSoldier
