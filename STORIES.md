@@ -32,7 +32,7 @@ However, we do expect you to write some additional (Unit) tests where you see fi
 
 Also, a REST-client such as [Postman](https://www.getpostman.com/) or [ARC](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo) might come in handy for some manual testing.
 
-#(War) Stories
+# (War) Stories
 ## Operation Avocado (starting point: [master](https://github.com/nielsjani/switchfully-security))
 
 You're given a very basic Spring Boot application with a couple of REST-calls (see ArmyResource).
@@ -75,6 +75,23 @@ Extra info:
 Extra assignment:
 - The article offers multiple ways to fix this problem. Try implementing both and see if they both do the job.
 - Users can have multiple roles. Create a user who is both a PRIVATE and a HUMAN_RELATIONSHIPS and check if he can do everything both roles can.
+- When using the 'antMatchers' method, create a couple of new rest endpoints:
+
+GET /armies/tanks (getTanksInfo)
+
+POST /armies/tanks (addTanks)
+
+DELETE /armies/tanks (blowUpTanksAndEnjoyTheFireworks)
+
+PUT /armies/tanks (addNewTanks)
+
+you don't have to implement these methods. All of them can be void
+- The GET call should only be available to PRIVATE and GENERAL and CIVILIAN
+- The POST call should only be available to PRIVATE 
+- The DELETE call should only be available to GENERAL
+- The PUT call should only be available to PRIVATE and GENERAL
+
+Write some E2E tests up front to check your assumptions.
 
 ## Operation Cedar (starting point: [CEDAR-START branch](https://github.com/nielsjani/switchfully-security/tree/CEDAR-START))
 In the previous story we implemented 'Role based'-security. There is another way to approach this, however: feature based security.
@@ -108,6 +125,11 @@ When using a custom AuthenticationProvider, Spring pretty much requires you to b
 To not make the story even bigger than it already is, we're gonna cheat a bit on that part (don't worry, we'll implement it properly in the next story).
 To fix everything up, change your 'hasRole'- and 'hasAnyRole'-code in the ArmyResource and/or SecurityConfig to 'hasAuthority' and 'hasAnyAuthority'.
 If everything is implemented correctly, both the baobabTest and the AvocadoTest should run.
+
+Extra assignment:
+Replace the passwords in the fakeAuthenticationService with hashed versions
+When checking if a user's username/password combo is correct, you'll have to hash the password too 
+http://www.baeldung.com/sha-256-hashing-java
 
 ## Operation Dogwood (starting point: [DOGWOOD-START branch](https://github.com/nielsjani/switchfully-security/tree/DOGWOOD-START))
 
@@ -143,6 +165,17 @@ Its method 'hasCriminalRecord' takes a username (a.k.a. the path param from the 
 If the 'offenses' on this object are empty, the person is 'clean'.
 
 A couple of new accounts have been added to the FakeAuthenticationService, some of them with criminal records, others without. 
+
+Extra assignment:
+Implement the promotePrivate method:
+
+A soldier can only be promoted by his supervisor
+
+Create an in-memory structure that holds the link between a private and his supervisor (the supervisor has to be someone with the role PRIVATE or GENERAL)
+
+add/alter an access check to the promotePrivate method that checks if a certain promotion can take place.
+
+Then do the same for dischargeSoldier
 
 # Extraction Point (for a look at the final code: [EXTRACTION-POINT branch](https://github.com/nielsjani/switchfully-security/tree/EXTRACTION-POINT))
 
