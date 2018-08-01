@@ -48,6 +48,17 @@ Getting started:
  This is not an advisable solution for real life applications, because there is no way for you to easily change/add/remove your users when the app is running.
  We will be switching to an LDAP in later exercises.
 - The inMemoryAuthentication will have to hold a user called 'JMILLER' with password 'THANKS' in order for the AvocadoTest to pass.
+- Since Spring Security 5, you need to have a passwordencoder present when creating users. 
+This is to prevent you from storing passwords as plaintext. 
+The inMemoryAuthentication will need this too, otherwise you'll get an error when running your tests.
+  - For more info, read the following articles: 
+ [stackoverflow question about the error](https://stackoverflow.com/questions/46999940/spring-boot-passwordencoder-error),
+ [baeldung: spring seucrity 5 password storage](http://www.baeldung.com/spring-security-5-password-storage) and
+ [baeldung: registration - password encoding](http://www.baeldung.com/spring-security-registration-password-encoding-bcrypt).
+  - You can use SHA256 as an encoding algorithm. It's not the most secure (bcrypt is), but the encoding can easily be done online using
+ [this](https://www.md5online.org/md5-encrypt.html) or [this](http://online-code-generator.com/md5-hash-with-optional-salt.php) site. 
+  - !!!If you want to use a salt, make sure you put it AFTER the password!!!
+ 
 
 Extra info:
 - [What is a realm?](https://stackoverflow.com/questions/16186834/whats-the-meaning-of-realm-in-spring-security)
