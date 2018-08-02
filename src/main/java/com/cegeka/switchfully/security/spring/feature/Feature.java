@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum Feature {
-    GET_ARMY_INFO(ArmyRole.PRIVATE, ArmyRole.GENERAL),
-    JOIN_ARMY(ArmyRole.CIVILIAN),
-    PROMOTE_PRIVATE(ArmyRole.HUMAN_RELATIONSHIPS),
-    DISCHARGE_SOLDIER(ArmyRole.HUMAN_RELATIONSHIPS),
-    LAUNCH_NUKES(ArmyRole.GENERAL);
+    GET_ARMY_INFO(ArmyRole.PRIVATE, ArmyRole.GENERAL, ArmyRole.MATHEMATICIANS, ArmyRole.CHEMISTS),
+    JOIN_ARMY(ArmyRole.CIVILIAN, ArmyRole.SCIENTISTS),
+    PROMOTE_PRIVATE(ArmyRole.HUMAN_RELATIONSHIPS, ArmyRole.ITALIANS),
+    DISCHARGE_SOLDIER(ArmyRole.HUMAN_RELATIONSHIPS, ArmyRole.ITALIANS),
+    LAUNCH_NUKES(ArmyRole.GENERAL, ArmyRole.MATHEMATICIANS);
 
     private ArmyRole[] roles;
 

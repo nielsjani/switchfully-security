@@ -3,10 +3,12 @@ package com.cegeka.switchfully.security.spring;
 import com.cegeka.switchfully.security.spring.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ldap.core.AuthenticatedLdapEntryContextMapper;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.ldap.query.LdapQueryBuilder;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,11 +28,26 @@ public class ArmyAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SpringSecurityLdapTemplate ldapTemplate = getLdapTemplate();
-        return ldapTemplate.authenticate(LdapQueryBuilder.query().filter("uid=euler"), "password", mapToArmyAuthentication(authentication, ldapTemplate));
+        return authenticateWithExceptionHandling(authentication, ldapTemplate);
+    }
+
+    private ArmyAuthentication authenticateWithExceptionHandling(Authentication authentication, SpringSecurityLdapTemplate ldapTemplate) {
+        try {
+            return ldapTemplate.authenticate(LdapQueryBuilder.query().filter(
+                    "uid=" + authentication.getPrincipal().toString()),
+                    authentication.getCredentials().toString(),
+                    mapToArmyAuthentication(authentication, ldapTemplate));
+        } catch (org.springframework.ldap.AuthenticationException | EmptyResultDataAccessException e) {
+            throw new BadCredentialsException("BAD BAD NOT GOOD");
+        }
     }
 
     private AuthenticatedLdapEntryContextMapper<ArmyAuthentication> mapToArmyAuthentication(Authentication authentication, SpringSecurityLdapTemplate ldapTemplate) {
-        return (ctx, ldapEntryIdentification) -> new ArmyAuthentication(authentication.getPrincipal().toString(), authentication.getCredentials().toString(), Feature.getFeaturesForRoles(newArrayList(getRolesForUser(ldapTemplate))));
+        return (ctx, ldapEntryIdentification) ->
+                new ArmyAuthentication(
+                        authentication.getPrincipal().toString(),
+                        authentication.getCredentials().toString(),
+                        Feature.getFeaturesForRoles(newArrayList(getRolesForUser(ldapTemplate, authentication))));
     }
 
     private SpringSecurityLdapTemplate getLdapTemplate() {
@@ -43,8 +60,11 @@ public class ArmyAuthenticationProvider implements AuthenticationProvider {
         return new SpringSecurityLdapTemplate(contextSource);
     }
 
-    private Set<String> getRolesForUser(SpringSecurityLdapTemplate ldapTemplate) {
-        return ldapTemplate.searchForSingleAttributeValues("", "(uniqueMember={0})", new String[]{"uid=riemann,dc=example,dc=com", "riemann"}, "cn");
+    private Set<String> getRolesForUser(SpringSecurityLdapTemplate ldapTemplate, Authentication authentication) {
+        return ldapTemplate.searchForSingleAttributeValues("",
+                "(uniqueMember={0})",
+                new String[]{"uid=" + authentication.getPrincipal().toString() + ",dc=example,dc=com", authentication.getPrincipal().toString()},
+                "cn");
     }
 
     @Override
