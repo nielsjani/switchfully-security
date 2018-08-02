@@ -51,8 +51,8 @@ public class BaobabTest extends RestAssuredTest {
 
 
     @Test
-    public void launchNukes_givenUserWithRoleCivilian_ThenShouldGetForbidden() {
-        givenRequestForUser("ZWANETTA", "WORST")
+    public void launchNukes_givenUserWithRoleScientist_ThenShouldGetForbidden() {
+        givenRequestForUser("newton", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "nuke"))
                 .then()
@@ -61,8 +61,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void launchNukes_givenUserWithRoleHumanRelations_ThenShouldGetForbidden() {
-        givenRequestForUser("UNCLE", "SAM")
+    public void launchNukes_givenUserWithRoleItalians_ThenShouldGetForbidden() {
+        givenRequestForUser("tesla", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "nuke"))
                 .then()
@@ -71,8 +71,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void launchNukes_givenUserWithRolePrivate_ThenShouldGetForbidden() {
-        givenRequestForUser("JMILLER", "THANKS")
+    public void launchNukes_givenUserWithRoleChemist_ThenShouldGetForbidden() {
+        givenRequestForUser("curie", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "nuke"))
                 .then()
@@ -81,8 +81,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void launchNukes_givenUserWithRoleGeneral_ThenShouldGetResult() {
-        givenRequestForUser("GENNY", "RALLY")
+    public void launchNukes_givenUserWithRoleMathematist_ThenShouldGetResult() {
+        givenRequestForUser("euler", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "nuke"))
                 .then()
@@ -94,8 +94,8 @@ public class BaobabTest extends RestAssuredTest {
 
 
     @Test
-    public void joinArmy_givenUserWithRoleCivilian_ThenShouldGetResult() {
-        givenRequestForUser("ZWANETTA", "WORST")
+    public void joinArmy_givenUserWithRoleScientist_ThenShouldGetResult() {
+        givenRequestForUser("newton", "password")
                 .when()
                 .post(ArmyResource.ARMY_RESOURCE_PATH)
                 .then()
@@ -104,8 +104,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void joinArmy_givenUserWithRoleHumanRelations_ThenShouldGetForbidden() {
-        givenRequestForUser("UNCLE", "SAM")
+    public void joinArmy_givenUserWithRoleItalians_ThenShouldGetForbidden() {
+        givenRequestForUser("tesla", "password")
                 .when()
                 .post(ArmyResource.ARMY_RESOURCE_PATH)
                 .then()
@@ -114,8 +114,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void joinArmy_givenUserWithRolePrivate_ThenShouldGetForbidden() {
-        givenRequestForUser("JMILLER", "THANKS")
+    public void joinArmy_givenUserWithRoleChemist_ThenShouldGetForbidden() {
+        givenRequestForUser("curie", "password")
                 .when()
                 .post(ArmyResource.ARMY_RESOURCE_PATH)
                 .then()
@@ -124,8 +124,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void joinArmy_givenUserWithRoleGeneral_ThenShouldGetForbidden() {
-        givenRequestForUser("GENNY", "RALLY")
+    public void joinArmy_givenUserWithRoleMathematist_ThenShouldGetForbidden() {
+        givenRequestForUser("euler", "password")
                 .when()
                 .post(ArmyResource.ARMY_RESOURCE_PATH)
                 .then()
@@ -137,8 +137,8 @@ public class BaobabTest extends RestAssuredTest {
 
 
     @Test
-    public void promotePrivate_givenUserWithRoleCivilian_ThenShouldGetForbidden() {
-        givenRequestForUser("ZWANETTA", "WORST")
+    public void promotePrivate_givenUserWithRoleScientist_ThenShouldGetForbidden() {
+        givenRequestForUser("newton", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "ZWANETTA"))
                 .then()
@@ -147,8 +147,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void promotePrivate_givenUserWithRoleHumanRelations_ThenShouldGetResult() {
-        givenRequestForUser("UNCLE", "SAM")
+    public void promotePrivate_givenUserWithRoleItalians_ThenShouldGetResult() {
+        givenRequestForUser("tesla", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "ZWANETTA"))
                 .then()
@@ -157,8 +157,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void promotePrivate_givenUserWithRolePrivate_ThenShouldGetForbidden() {
-        givenRequestForUser("JMILLER", "THANKS")
+    public void promotePrivate_givenUserWithRoleChemist_ThenShouldGetForbidden() {
+        givenRequestForUser("curie", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "ZWANETTA"))
                 .then()
@@ -167,8 +167,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void promotePrivate_givenUserWithRoleGeneral_ThenShouldGetForbidden() {
-        givenRequestForUser("GENNY", "RALLY")
+    public void promotePrivate_givenUserWithRoleMathematist_ThenShouldGetForbidden() {
+        givenRequestForUser("euler", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "ZWANETTA"))
                 .then()
@@ -180,8 +180,8 @@ public class BaobabTest extends RestAssuredTest {
 
 
     @Test
-    public void dischargePrivate_givenUserWithRoleCivilian_ThenShouldGetForbidden() {
-        givenRequestForUser("ZWANETTA", "WORST")
+    public void dischargePrivate_givenUserWithRoleScientist_ThenShouldGetForbidden() {
+        givenRequestForUser("newton", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "discharge", "ZWANETTA"))
                 .then()
@@ -190,8 +190,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void dischargePrivate_givenUserWithRoleHumanRelations_ThenShouldGetResult() {
-        givenRequestForUser("UNCLE", "SAM")
+    public void dischargePrivate_givenUserWithRoleItalians_ThenShouldGetResult() {
+        givenRequestForUser("tesla", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "discharge", "ZWANETTA"))
                 .then()
@@ -200,8 +200,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void dischargePrivate_givenUserWithRolePrivate_ThenShouldGetForbidden() {
-        givenRequestForUser("JMILLER", "THANKS")
+    public void dischargePrivate_givenUserWithRoleChemist_ThenShouldGetForbidden() {
+        givenRequestForUser("curie", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "discharge", "ZWANETTA"))
                 .then()
@@ -210,8 +210,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void dischargePrivate_givenUserWithRoleGeneral_ThenShouldGetForbidden() {
-        givenRequestForUser("GENNY", "RALLY")
+    public void dischargePrivate_givenUserWithRoleMathematist_ThenShouldGetForbidden() {
+        givenRequestForUser("euler", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "discharge", "ZWANETTA"))
                 .then()
