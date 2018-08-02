@@ -12,7 +12,7 @@ public class AvocadoTest extends RestAssuredTest {
 
     @Test
     public void getDeployedArmyInfo_givenKnownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldAllowAccess() {
-        ArmyInfoDto actual = givenRequestForUser("JMILLER", "THANKS")
+        ArmyInfoDto actual = givenRequestForUser("curie", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
@@ -27,7 +27,7 @@ public class AvocadoTest extends RestAssuredTest {
 
     @Test
     public void getDeployedArmyInfo_givenKnownUsernameAndWrongPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
-        givenRequestForUser("JMILLER", "JBAKER")
+        givenRequestForUser("curie", "wasspord")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
@@ -37,7 +37,7 @@ public class AvocadoTest extends RestAssuredTest {
 
     @Test
     public void getDeployedArmyInfo_givenUnknownUsernameAndPasswordEncodedAsBasicAuthenticationHeader_thenShouldNotAllowAccess() {
-        givenRequestForUser("FONZ", "AYE")
+        givenRequestForUser("marie", "marie")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()

@@ -8,8 +8,8 @@ import static org.springframework.http.HttpStatus.OK;
 
 public class BaobabTest extends RestAssuredTest {
     @Test
-    public void getDeployedArmyInfo_givenUserWithRoleCivilian_ThenShouldGetForbidden() {
-        givenRequestForUser("ZWANETTA", "WORST")
+    public void getDeployedArmyInfo_givenUserWithRoleScientist_ThenShouldGetForbidden() {
+        givenRequestForUser("newton", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
@@ -18,8 +18,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void getDeployedArmyInfo_givenUserWithRoleHumanRelations_ThenShouldGetForbidden() {
-        givenRequestForUser("UNCLE", "SAM")
+    public void getDeployedArmyInfo_givenUserWithRoleItalians_ThenShouldGetForbidden() {
+        givenRequestForUser("tesla", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
@@ -28,8 +28,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void getDeployedArmyInfo_givenUserWithRolePrivate_ThenShouldGetResult() {
-        givenRequestForUser("JMILLER", "THANKS")
+    public void getDeployedArmyInfo_givenUserWithRoleChemist_ThenShouldGetResult() {
+        givenRequestForUser("curie", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
@@ -38,8 +38,8 @@ public class BaobabTest extends RestAssuredTest {
     }
 
     @Test
-    public void getDeployedArmyInfo_givenUserWithRoleGeneral_ThenShouldGetResult() {
-        givenRequestForUser("GENNY", "RALLY")
+    public void getDeployedArmyInfo_givenUserWithRoleMathematist_ThenShouldGetResult() {
+        givenRequestForUser("euler", "password")
                 .when()
                 .get(String.format("%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "Belgium"))
                 .then()
