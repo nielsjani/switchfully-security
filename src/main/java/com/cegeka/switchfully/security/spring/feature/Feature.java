@@ -26,6 +26,7 @@ public enum Feature {
 
     public static List<Feature> getFeaturesForRoles(List<String> rolesOfUserAsString) {
         List<ArmyRole> rolesOfUser = rolesOfUserAsString.stream()
+                .map(String::toUpperCase)
                 .map(ArmyRole::valueOf)
                 .collect(Collectors.toList());
         return Arrays.stream(Feature.values())

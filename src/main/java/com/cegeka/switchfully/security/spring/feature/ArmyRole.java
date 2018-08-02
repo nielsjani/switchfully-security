@@ -4,5 +4,9 @@ public enum ArmyRole {
     CIVILIAN,
     PRIVATE,
     HUMAN_RELATIONSHIPS,
-    GENERAL
+    GENERAL,
+    MATHEMATICIANS,
+    CHEMISTS,
+    SCIENTISTS,
+    ITALIANS
 }
