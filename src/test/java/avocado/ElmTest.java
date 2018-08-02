@@ -11,7 +11,7 @@ public class ElmTest extends RestAssuredTest {
 
     @Test
     public void promote_GivenCandidateHasCriminalRecord_ThenOk() {
-        givenRequestForUser("UNCLE", "SAM")
+        givenRequestForUser("tesla", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "JMILLER"))
                 .then()
@@ -21,7 +21,7 @@ public class ElmTest extends RestAssuredTest {
 
     @Test
     public void promote_GivenCandidateHasCriminalRecord_ThenNotOk() {
-        givenRequestForUser("UNCLE", "SAM")
+        givenRequestForUser("tesla", "password")
                 .when()
                 .post(String.format("%s/%s/%s", ArmyResource.ARMY_RESOURCE_PATH, "promote", "CRIMI"))
                 .then()
