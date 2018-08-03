@@ -190,6 +190,55 @@ Then do the same for dischargeSoldier
 
 # Extraction Point (for a look at the final code: [EXTRACTION-POINT branch](https://github.com/nielsjani/switchfully-security/tree/EXTRACTION-POINT))
 
+# Operation Fir (starting point: [FIR-START branch](https://github.com/nielsjani/switchfully-security/tree/FIR-START))
+
+Let's connect to a real LDAP to fetch our users. We will be using a publicly available test LDAP server. 
+Connection info can be found [here](http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/), 
+but also in the properties file found in this branch. 
+You can connect directly with the LDAP using tools like [Apache Directory](http://directory.apache.org/), 
+or you could take a look at the altered tests to see the expected results.
+
+There is an easy way to [connect an LDAP with Spring](https://spring.io/guides/gs/authenticating-ldap/), but this won't work in our 
+feature-based security context because we won't have a hook to assign features to the returned users (also, it wouldn't make for an interesting exercise). 
+So we will have to create our own SpringSecurityLdapTemplate and do the necessary calls and mappings ourselves. Programming! Yay!
+
+Let's start off with some new maven dependencies. You'll need:
+- "org.springframework.ldap:spring-ldap-core:(version provided by spring parent)"
+- "org.springframework.security:spring-security-ldap:5.0.7.RELEASE" (version not provided at the time of writing)
+
+Now let's dive in our AuthenticationProvider. We no longer need to call the FakeAuthenticationService. 
+Instead we'll need to construct a SpringSecurityLdapTemplate. 
+This object takes an LdapContextSource as a parameter in its constructor. 
+[Here's an example](https://gist.github.com/mpilone/7582628) to set one of these up.
+
+You'll have to use the LdapTemplate now. It has a myriad of methods. A combination that fits our needs is:
+- authenticate, an method that takes a filter (you can filter on uid) and a password.
+If the combination is correct, it will pass the corresponding user to the third parameter, a mapping function. 
+Otherwise, it will throw an exception.
+- searchForSingleAttributeValues. The problem with authenticate is that it does not return the group(s) the user is part of.
+That's what this method is for. 
+It takes a number of parameters: 
+  - 'base': you can pass an empty string here
+  - 'filter': should be (uniqueMember={0})
+  - an array of params: should look something like this "uid=username,dc=example,dc=com", "username"
+  - the attributename we would like to know: 'cn'
+ 
+Having gathered all this data, we need to map it to an Authentication object, like we did with the FakeAuthenticationService. 
+All users in the test LDAP are part of at least one and at most two groups (= roles). 
+Those groups don't match the ones we've defined so far, so here's a mapping from the test LDAP's roles to ours:
+- MATHEMATICIANS => GENERAL
+- CHEMISTS => PRIVATE
+- SCIENTISTS => CIVILIAN
+- ITALIANS => HUMAN_RELATIONSHIPS
+
+Alter the Feature class, so the test LDAP roles have correct access to each endpoint.
+
+If you're stuck, debugging a test that should return a HTTP 200 might help you to see what's wrong. 
+The hardest part of this exercise is getting the calls to the LDAP to work. 
+Also, Google probably is not your friend on this one...
+
+You can check [Operation Gorse](https://github.com/nielsjani/switchfully-security/tree/FIR-GORSE) for a solution to this story.
+
 Congratulations, [a winner is you](http://i0.kym-cdn.com/photos/images/facebook/000/048/783/a_winner_is_you20110724-22047-1nd3wif.jpg)!
 You've completed all stories and made the lives of your fellow countrymen a little safer. 
 See any of your fellow students struggling? 
